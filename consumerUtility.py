@@ -105,14 +105,21 @@ def get_custom_hicksian_demand(prices, util_level, util_func):
 ###### Define UMP and EMP functions for Leontief, Cobb-Douglas and CES utility functions ######
 # Recall that closed form solutions exist for the UMP and EMP problem for both of these function
 
+
 ######    Linear Utilities    ######
 
 def get_linear_indirect_utill(prices, budget, valuations):
     return np.max(valuations/prices)*budget
 
+def get_linear_marshallian_demand(prices, budget, valuations):
+    max_bang_buck_goods = (valuations/prices >= np.max(valuations/prices))
+    cost = max_bang_buck_goods.T @ prices
+    
+    return max_bang_buck_goods*(budget/cost)
+
 def get_linear_expend(prices, util, valuations):
     return np.min(prices/valuations)*util
-    
+
 ###### Cobb-Douglas Utilities ######
 
 
